@@ -23,7 +23,9 @@ class SnakeMap(val rows: Int, val cols: Int) {
         val emptyTiles = ArrayList<Pair<Int, Int>>()
         for (i in 0 until rows) {
             for (j in 0 until cols) {
-                if (map[i][j] == MapBlock.EMPTY) {
+                if(containsSnake(i, j)) {
+                    map[i][j] = MapBlock.SNAKE //check with Taicheng that this doesn't interfere with his logic
+                } else if (map[i][j] == MapBlock.EMPTY) {
                     emptyTiles.add(Pair(i, j))
                 }
             }
@@ -48,5 +50,16 @@ class SnakeMap(val rows: Int, val cols: Int) {
     fun setTile(position: Pair<Int, Int>, tile: MapBlock) {
         val (i, j) = position
         map[i][j] = tile
+    }
+    /*** This function is to check if mapTile contains snake body ***/
+    fun containsSnake(row: Int, col: Int): Boolean {
+        for(i in 0 until SnakeBody().body.size){
+            //check that there isn't a snake node at the position
+            if(SnakeBody().body[i].row == row && SnakeBody().body[i].column == col){
+                //there is a snake body part at this position
+                return true
+            }
+        }
+        return false
     }
 }
