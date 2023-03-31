@@ -1,6 +1,7 @@
 package com.example.snakegame
 
-/*** Author: Aditya Sharma (B00827775)
+/*** Score Class
+ *   Author: Aditya Sharma (B00827775)
  *   This class keeps track of the current score and high score of the game ***/
 
 class Score() {
@@ -11,9 +12,13 @@ class Score() {
      *   If it has, it replaces the high score ***/
     fun addScore() {
         score += 1;
-        if(score >= highScore){
-            highScore = score;
+        if(score > highScore){
+            replaceHighScore(score)
         }
+    }
+    /*** return the current score value ***/
+    private fun replaceHighScore(score: Int) {
+        highScore = score;
     }
     /*** return the current score value ***/
     fun getGameScore(): Int {
