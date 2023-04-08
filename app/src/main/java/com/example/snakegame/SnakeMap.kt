@@ -2,7 +2,9 @@ package com.example.snakegame
 
 /*** This class is about game map.
  * It contains functions related to grid,
- * fruits and collision detection ***/
+ * fruits and collision detection
+ *
+ * Worked on by both Taicheng Zhu () and Taylor MacIntyre ()***/
 
 class SnakeMap(val rows: Int, val cols: Int) {
     val map = ArrayList<ArrayList<MapBlock>>()
@@ -19,7 +21,6 @@ class SnakeMap(val rows: Int, val cols: Int) {
     }
     /*** This function is used to randomly generate fruits on the map ***/
     fun generateFood() {
-        //TODO: Fruits may be generated at the location of the snake
         val emptyTiles = ArrayList<Pair<Int, Int>>()
         //return an Arraylist<Pair<int,int>> of coordinates around snake's head
         val coordinatesNearHead = coordinatesNearSnakeHead()
