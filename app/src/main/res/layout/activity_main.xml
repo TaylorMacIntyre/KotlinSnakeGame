@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -15,14 +14,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:background="@color/btn"
             android:id="@+id/snake_start"
             android:layout_width="80dp"
+            android:textColor="@android:color/white"
             android:layout_height="match_parent"
-            android:background="@color/btn"
             android:gravity="center"
             android:text="Start"
-            android:textColor="@android:color/white"
-            android:textSize="17sp" />
+            android:textSize="17sp"/>
 
         <Button
             android:id="@+id/snake_left"
@@ -31,7 +30,7 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/keyborad_btn"
             android:text="Left"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"/>
 
 
         <LinearLayout
@@ -46,17 +45,17 @@
                 android:layout_height="60dp"
                 android:background="@drawable/keyborad_btn"
                 android:text="up"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <Button
                 android:id="@+id/snake_down"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/keyborad_btn"
                 android:text="down"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
@@ -67,7 +66,7 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/keyborad_btn"
             android:text="right"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 
