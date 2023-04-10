@@ -7,6 +7,7 @@ package com.example.snakegame
 class SnakeMap(val rows: Int, val cols: Int) {
     val map = ArrayList<ArrayList<MapBlock>>()
     var food: MapBlock? = null
+    var snake = SnakeBody()
 
     init {
         for (i in 0 until rows) {
@@ -15,6 +16,11 @@ class SnakeMap(val rows: Int, val cols: Int) {
                 row.add(MapBlock.EMPTY)
             }
             map.add(row)
+        }
+        // This will add the snakes body to the grid
+        map[snake.body[0].row][snake.body[0].column] = MapBlock.HEAD
+        for (i in 1 until snake.body.size) {
+            map[snake.body[i].row][snake.body[i].column] = MapBlock.SNAKE
         }
     }
     /*** This function is used to randomly generate fruits on the map ***/

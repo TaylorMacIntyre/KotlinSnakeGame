@@ -5,5 +5,6 @@ package com.example.snakegame
 enum class MapBlock {
     EMPTY,
     SNAKE,
-    FOOD
+    FOOD,
+    HEAD
 }
