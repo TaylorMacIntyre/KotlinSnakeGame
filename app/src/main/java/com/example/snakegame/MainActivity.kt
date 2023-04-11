@@ -1,23 +1,31 @@
 package com.example.snakegame
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import SnakeThread
+import android.graphics.*
+import android.graphics.Path.Direction
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOverCallback {
+
     private lateinit var surfaceView: SurfaceView
-    private lateinit var surfaceHolder: SurfaceHolder
     private lateinit var snakeBody: SnakeBody
     private lateinit var snakeMap: SnakeMap
+
+    private lateinit var startButton: TextView
+    private lateinit var leftButton: Button
+    private lateinit var rightButton: Button
+    private lateinit var upButton: Button
+    private lateinit var downButton: Button
+
     private var snakeThread: SnakeThread? = null
-    private var running = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,28 +33,47 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
 
         setContentView(R.layout.activity_main)
 
-
         surfaceView = findViewById(R.id.surface_view)
-
         surfaceView.holder.addCallback(this)
+        surfaceView.holder.setFormat(PixelFormat.TRANSPARENT);
 
         snakeBody = SnakeBody()
         snakeMap = SnakeMap(10, 10)
         snakeMap.callBack = this
 
+        startButton = findViewById<TextView>(R.id.snake_start)
+        leftButton = findViewById<Button>(R.id.snake_left)
+        rightButton = findViewById<Button>(R.id.snake_right)
+        upButton = findViewById<Button>(R.id.snake_up)
+        downButton = findViewById<Button>(R.id.snake_down)
+
+
+        startButton.setOnClickListener() {
+            snakeThread?.isPaused = !snakeThread?.isPaused!!
+            if(snakeThread?.isPaused === true) {
+                startButton.text = "Start"
+            } else {
+                startButton.text = "Pause"
+            }
+        }
+
+        leftButton.setOnClickListener() {
+            snakeThread?.direction = "left"
+        }
+
+        rightButton.setOnClickListener() {
+            snakeThread?.direction = "right"
+        }
+
+        upButton.setOnClickListener() {
+            snakeThread?.direction = "up"
+        }
+
+        downButton.setOnClickListener() {
+            snakeThread?.direction = "down"
+        }
+
     }
-    
-//    private fun startGameLoop() {
-//        val handler = Handler(Looper.getMainLooper())
-//        val runnable = object : Runnable {
-//            override fun run() {
-//                if (running) {
-//                    handler.postDelayed(this, 200)
-//                }
-//            }
-//        }
-//        handler.postDelayed(runnable, 200)
-//    }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
         snakeThread = SnakeThread(holder, snakeBody, snakeMap)
@@ -64,52 +91,16 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
                 snakeThread?.join()
                 retry = false
             } catch (e: InterruptedException) {
+                throw e
             }
         }
     }
 
     override fun onOver(isOk: Boolean) {
+
+        snakeThread?.interrupt()
+
         if (!isOk) {
-        }
-    }
-}
-
-class SnakeThread(private val surfaceHolder: SurfaceHolder, private val snakeBody: SnakeBody, private val snakeMap: SnakeMap) : Thread() {
-    var running = false
-
-    private val paint = Paint().apply {
-        color = Color.WHITE
-        style = Paint.Style.STROKE
-        strokeWidth = 20.0F
-    }
-
-    fun drawSnake(canvas: Canvas, x: Int, y: Int, color: Int) {
-       canvas.drawRect(x.toFloat(), y.toFloat(), (x+50).toFloat(), (y+50).toFloat(), paint)
-    }
-
-    fun moveSnake(canvas: Canvas) {
-
-        snakeBody.move()
-
-        for (i in (snakeBody.body.size-1) downTo 1) {
-            drawSnake(canvas, snakeBody.head.previousColumn - 10, snakeBody.head.previousRow, Color.BLACK)
-        }
-
-        drawSnake(canvas, snakeBody.head.column, snakeBody.head.row, Color.WHITE)
-    }
-
-
-    override fun run() {
-        while (running) {
-
-            val canvas = surfaceHolder.lockCanvas()
-
-            if (canvas != null) {
-
-                moveSnake(canvas)
-
-                surfaceHolder.unlockCanvasAndPost(canvas)
-            }
         }
     }
 }

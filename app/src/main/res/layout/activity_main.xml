@@ -84,7 +84,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/nake_righrt"
+            android:id="@+id/snake_right"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="10dp"
