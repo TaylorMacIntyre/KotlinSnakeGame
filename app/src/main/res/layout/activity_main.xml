@@ -6,13 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:background="@color/btn"
+            android:id="@+id/snake_start"
+            android:layout_width="80dp"
+            android:textColor="@android:color/white"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Start"
+            android:textSize="17sp"/>
+
+        <Button
+            android:id="@+id/snake_left"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/keyborad_btn"
+            android:text="Left"
+            android:textColor="@android:color/white"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/snake_up"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:background="@drawable/keyborad_btn"
+                android:text="up"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/snake_down"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/keyborad_btn"
+                android:text="down"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nake_righrt"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/keyborad_btn"
+            android:text="right"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/currentScore"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="score"
+        android:textColor="@color/white"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Button>
+    <Button
+        android:id="@+id/highScore"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="High Score"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
