@@ -28,7 +28,7 @@ class Score(context: Context) {
         saveSession(highScore)
     }
     private fun saveSession(score: Int) {
-        val pref = ref.getSharedPreferences("mysharedpref", Context.MODE_PRIVATE)
+        pref = ref.getSharedPreferences("mysharedpref", Context.MODE_PRIVATE)
         val editor=pref.edit()
         editor.putInt("highScore",score)
         editor.putString("name","User")
