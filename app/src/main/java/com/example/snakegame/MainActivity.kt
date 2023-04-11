@@ -89,13 +89,13 @@ class SnakeThread(private val surfaceHolder: SurfaceHolder, private val snakeBod
 
     fun moveSnake(canvas: Canvas) {
 
-        snakeBody.move()
+        snakeMap.snake.move()
 
-        for (i in (snakeBody.body.size-1) downTo 1) {
-            drawSnake(canvas, snakeBody.head.previousColumn - 10, snakeBody.head.previousRow, Color.BLACK)
+        for (i in (snakeMap.snake.body.size-1) downTo 1) {
+            drawSnake(canvas, snakeMap.snake.head.previousColumn - 10, snakeMap.snake.head.previousRow, Color.BLACK)
         }
 
-        drawSnake(canvas, snakeBody.head.column, snakeBody.head.row, Color.WHITE)
+        drawSnake(canvas, snakeMap.snake.head.column, snakeMap.snake.head.row, Color.WHITE)
     }
 
 
