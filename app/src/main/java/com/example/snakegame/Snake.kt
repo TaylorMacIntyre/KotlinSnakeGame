@@ -25,6 +25,8 @@ class SnakeBody {
         body.add(SnakeNode(0,0));
         head = body.get(0);
         this.direction = "right";
+
+        addNode()
     }
 
     fun move() {
