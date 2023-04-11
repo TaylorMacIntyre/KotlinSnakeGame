@@ -15,6 +15,7 @@ class SnakeMap(val rows: Int, val cols: Int) {
     var callBack: onOverCallback? = null
     val map = ArrayList<ArrayList<MapBlock>>()
     var food: MapBlock? = null
+    var snake: SnakeBody
 
     init {
         for (i in 0 until rows) {
@@ -24,6 +25,14 @@ class SnakeMap(val rows: Int, val cols: Int) {
             }
             map.add(row)
         }
+
+        snake = SnakeBody()
+
+        // This will add the snake's body to the grid
+        for (i in 0 until snake.body.size) {
+            map[snake.body[i].row][snake.body[i].column] = MapBlock.SNAKE
+        }
+
 
         initPaint()
     }
@@ -104,9 +113,9 @@ class SnakeMap(val rows: Int, val cols: Int) {
     }
     /*** This function is to check if mapTile contains snake body ***/
     fun containsSnake(row: Int, col: Int): Boolean {
-        for(i in 0 until SnakeBody().body.size){
+        for(i in 0 until snake.body.size){
             //check that there isn't a snake node at the position
-            if(SnakeBody().body[i].row == row && SnakeBody().body[i].column == col){
+            if(snake.body[i].row == row && snake.body[i].column == col){
                 //there is a snake body part at this position
                 return true
             }

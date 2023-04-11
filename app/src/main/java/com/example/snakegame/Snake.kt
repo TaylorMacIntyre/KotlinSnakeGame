@@ -9,8 +9,8 @@ class SnakeNode(row: Int, column: Int) {
     init {
         this.row = row;
         this.column = column;
-        this.previousRow = row - 1;
-        this.previousColumn = column - 1;
+        this.previousRow = row;
+        this.previousColumn = column;
     }
 }
 
@@ -21,20 +21,13 @@ class SnakeBody {
     var head: SnakeNode = SnakeNode(0,0)
 
     init {
+
         this.body = ArrayList<SnakeNode>();
+        body.add(SnakeNode(0,2));
+        body.add(SnakeNode(0,1));
         body.add(SnakeNode(0,0));
         head = body.get(0);
         this.direction = "right";
-
-        addNode()
-        addNode()
-        addNode()
-        addNode()
-        addNode()
-
-        addNode()
-        addNode()
-        addNode()
 
     }
 

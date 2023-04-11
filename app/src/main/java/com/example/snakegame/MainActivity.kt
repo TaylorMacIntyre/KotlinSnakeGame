@@ -97,10 +97,9 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
     }
 
     override fun onOver(isOk: Boolean) {
-
         snakeThread?.interrupt()
-
         if (!isOk) {
+
         }
     }
 }

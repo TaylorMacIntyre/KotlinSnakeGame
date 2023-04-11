@@ -45,13 +45,13 @@ class SnakeThread(private val surfaceHolder: SurfaceHolder, private val snakeBod
 
     fun moveSnake(canvas: Canvas) {
 
-        snakeBody.move()
+        snakeMap.snake.move()
 
         for (i in (snakeBody.body.size-1) downTo 1) {
-            drawSnake(canvas, snakeBody.body.get(i).column + (i*20), snakeBody.body.get(i).row, Color.WHITE, direction)
+            drawSnake(canvas, snakeMap.snake.body.get(i).column + (i*20), snakeMap.snake.body.get(i).row, Color.WHITE, direction)
         }
         Log.e("x,y" ,snakeBody.head.column.toString())
-        drawSnake(canvas, snakeBody.head.column, snakeBody.head.row, Color.WHITE, direction)
+        drawSnake(canvas, snakeMap.snake.head.column, snakeMap.snake.head.row, Color.WHITE, direction)
     }
 
     fun drawFood(canvas: Canvas) {
