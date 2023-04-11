@@ -64,9 +64,9 @@ class SnakeMap(val rows: Int, val cols: Int) {
     }
     /*** This function is to check if mapTile contains snake body ***/
     fun containsSnake(row: Int, col: Int): Boolean {
-        for(i in 0 until SnakeBody().body.size){
+        for(i in 0 until snake.body.size){
             //check that there isn't a snake node at the position
-            if(SnakeBody().body[i].row == row && SnakeBody().body[i].column == col){
+            if(snake.body[i].row == row && snake.body[i].column == col){
                 //there is a snake body part at this position
                 return true
             }
@@ -81,10 +81,10 @@ class SnakeMap(val rows: Int, val cols: Int) {
      */
     fun coordinatesNearSnakeHead(): ArrayList<Pair<Int, Int>>{
         val coordinatesNearSnakeHead = ArrayList<Pair<Int, Int>>()
-        val headRow = SnakeBody().body[0].row
-        val headCol = SnakeBody().body[0].column
+        val headRow = snake.body[0].row
+        val headCol = snake.body[0].column
 
-        if(SnakeBody().direction.equals("left")){
+        if(snake.direction.equals("left")){
             for(i in (headRow-1) until headRow+2 ){
                 for(j in (headCol-3) until headCol+1){
                     if(i>=0 && j>=0 && i<rows && j<cols) {
@@ -94,7 +94,7 @@ class SnakeMap(val rows: Int, val cols: Int) {
                     }
                 }
             }
-        } else if (SnakeBody().direction.equals("right")) {
+        } else if (snake.direction.equals("right")) {
             for(i in (headRow-1) until headRow+2){
                 for(j in headCol until headCol+4){
                     if(i>=0 && j>=0 && i<rows && j<cols) {
@@ -105,7 +105,7 @@ class SnakeMap(val rows: Int, val cols: Int) {
                 }
             }
 
-        } else if (SnakeBody().direction.equals("down")) {
+        } else if (snake.direction.equals("down")) {
             for(i in (headRow-3) until headRow+1){
                 for(j in (headCol-1) until (headCol+2)){
                     if(i>=0 && j>=0 && i<rows && j<cols) {

@@ -21,10 +21,13 @@ class SnakeBody {
     var head: SnakeNode = SnakeNode(0,0)
 
     init {
-        this.body = ArrayList<SnakeNode>();
+        this.body = ArrayList<SnakeNode>()
+        // Start the body with 3 segments, the reason we decide to start with 3 is so there is no way for the user to move the snake into another body segment before any fruit is acquired
+        body.add(SnakeNode(0,2))
+        body.add(SnakeNode(0,1));
         body.add(SnakeNode(0,0));
-        head = body.get(0);
-        this.direction = "right";
+        head = body.get(0)
+        this.direction = "right"
     }
 
     fun move() {
