@@ -1,6 +1,7 @@
 package com.example.snakegame
 
 class SnakeNode(row: Int, column: Int) {
+    // We want to keep track of previous column so that it can be used when we are adding a new part to the snake
     var row: Int = 0;
     var column: Int = 0;
     var previousRow: Int = 0;
