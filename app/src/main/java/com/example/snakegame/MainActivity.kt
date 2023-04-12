@@ -39,18 +39,11 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
 
         setContentView(R.layout.activity_main)
 
+        initializeViews()
+
         surfaceView = findViewById(R.id.surface_view)
         surfaceView.holder.addCallback(this)
         surfaceView.holder.setFormat(PixelFormat.TRANSPARENT);
-
-
-        startButton = findViewById<TextView>(R.id.snake_start)
-        leftButton = findViewById<Button>(R.id.snake_left)
-        rightButton = findViewById<Button>(R.id.snake_right)
-        upButton = findViewById<Button>(R.id.snake_up)
-        downButton = findViewById<Button>(R.id.snake_down)
-
-        scoreText = findViewById<TextView>(R.id.currentScore)
 
 
         startButton.setOnClickListener() {
@@ -114,6 +107,16 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
         if (!isOk) {
 
         }
+    }
+
+    private fun initializeViews() {
+        startButton = findViewById<TextView>(R.id.snake_start)
+        leftButton = findViewById<Button>(R.id.snake_left)
+        rightButton = findViewById<Button>(R.id.snake_right)
+        upButton = findViewById<Button>(R.id.snake_up)
+        downButton = findViewById<Button>(R.id.snake_down)
+
+        scoreText = findViewById<TextView>(R.id.currentScore)
     }
 
     fun updateScore(){

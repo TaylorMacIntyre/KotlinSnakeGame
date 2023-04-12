@@ -1,4 +1,5 @@
 import android.graphics.*
+import android.graphics.Paint.Style
 import android.util.Log
 import android.view.SurfaceHolder
 import com.example.snakegame.MainActivity
@@ -27,7 +28,6 @@ class SnakeThread(
     private var paint = Paint().apply {
         color = Color.WHITE
         style = Paint.Style.STROKE
-        strokeCap = Paint.Cap.ROUND
         strokeWidth = 15.0F
     }
 
