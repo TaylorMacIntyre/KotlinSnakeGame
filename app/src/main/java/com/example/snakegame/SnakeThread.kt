@@ -54,6 +54,8 @@ class SnakeThread(
             }
         }
 
+
+
         /** Check if intersecting with food **/
         if(!(abs(head.row - food.second) < 30) || !(abs(head.column - food.first) < 30)) {
             snakeMap.snake.removeNode()
@@ -67,6 +69,7 @@ class SnakeThread(
         for (i in (snakeMap.snake.body.size-1) downTo 1) {
             val c = snakeMap.snake.body.get(i).column.toFloat()
             val r = snakeMap.snake.body.get(i).row.toFloat()
+
             canvas.drawRect(c, r,c+steps, r+steps , paint)
         }
 

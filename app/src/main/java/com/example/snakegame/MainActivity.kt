@@ -55,20 +55,29 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
             }
         }
 
+        // When changing direction, we check to see if the direction currently being travelled is the opposite of the new direction, if it is, we do not change direction to avoid snake moving on itself
         leftButton.setOnClickListener() {
-            snakeThread?.direction = "left"
+            if (snakeThread?.direction !== "right") {
+                snakeThread?.direction = "left"
+            }
         }
 
         rightButton.setOnClickListener() {
-            snakeThread?.direction = "right"
+            if (snakeThread?.direction !== "left") {
+                snakeThread?.direction = "right"
+            }
         }
 
         upButton.setOnClickListener() {
-            snakeThread?.direction = "up"
+            if (snakeThread?.direction !== "down") {
+                snakeThread?.direction = "up"
+            }
         }
 
         downButton.setOnClickListener() {
-            snakeThread?.direction = "down"
+            if (snakeThread?.direction !== "up") {
+                snakeThread?.direction = "down"
+            }
         }
 
     }
