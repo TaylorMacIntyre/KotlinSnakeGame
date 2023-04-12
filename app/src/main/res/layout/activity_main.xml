@@ -94,11 +94,14 @@
 
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/currentScore"
-        android:layout_width="100dp"
+        android:layout_width="125dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/keyborad_btn"
         android:layout_height="wrap_content"
         android:text="score"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </Button>
+    </TextView>
     <Button
         android:id="@+id/highScore"
         android:layout_width="100dp"

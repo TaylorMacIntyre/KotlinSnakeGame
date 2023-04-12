@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
     private lateinit var upButton: Button
     private lateinit var downButton: Button
 
+    private lateinit var scoreText: TextView
+
+    private var score: Int = 0
+
     private var snakeThread: SnakeThread? = null
 
 
@@ -37,15 +41,14 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
         surfaceView.holder.addCallback(this)
         surfaceView.holder.setFormat(PixelFormat.TRANSPARENT);
 
-        snakeBody = SnakeBody()
-        snakeMap = SnakeMap(10, 10)
-        snakeMap.callBack = this
 
         startButton = findViewById<TextView>(R.id.snake_start)
         leftButton = findViewById<Button>(R.id.snake_left)
         rightButton = findViewById<Button>(R.id.snake_right)
         upButton = findViewById<Button>(R.id.snake_up)
         downButton = findViewById<Button>(R.id.snake_down)
+
+        scoreText = findViewById<TextView>(R.id.currentScore)
 
 
         startButton.setOnClickListener() {
@@ -76,7 +79,15 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        snakeThread = SnakeThread(holder, snakeBody, snakeMap)
+
+        Log.e("size:", surfaceView.width.toString())
+        Log.e("size:", surfaceView.height.toString())
+
+        snakeBody = SnakeBody()
+        snakeMap = SnakeMap(surfaceView.width, surfaceView.height)
+        snakeMap.callBack = this
+
+        snakeThread = SnakeThread(holder, snakeBody, snakeMap, this)
         snakeThread?.running = true
         snakeThread?.start()
     }
@@ -102,4 +113,10 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
 
         }
     }
+
+    fun updateScore(){
+        score++
+        scoreText.text = "Score: " + score.toString()
+    }
+    
 }

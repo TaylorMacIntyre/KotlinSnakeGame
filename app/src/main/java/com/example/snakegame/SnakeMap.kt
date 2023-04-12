@@ -15,6 +15,7 @@ class SnakeMap(val rows: Int, val cols: Int) {
     var callBack: onOverCallback? = null
     val map = ArrayList<ArrayList<MapBlock>>()
     var food: MapBlock? = null
+    var foodLocation: Pair<Int, Int> = Pair(0,0)
     var snake: SnakeBody
 
     init {
@@ -78,7 +79,7 @@ class SnakeMap(val rows: Int, val cols: Int) {
 
     
     /*** This function is used to randomly generate fruits on the map ***/
-    fun generateFood() {
+    fun generateFood(): Pair<Int, Int> {
         //TODO: Fruits may be generated at the location of the snake
         val emptyTiles = ArrayList<Pair<Int, Int>>()
         for (i in 0 until rows) {
@@ -94,7 +95,11 @@ class SnakeMap(val rows: Int, val cols: Int) {
             val (i, j) = emptyTiles.random()
             map[i][j] = MapBlock.FOOD
             food = MapBlock.FOOD
+
+            return Pair(i, j)
         }
+
+        return Pair(0, 0)
     }
     /*** This function is used to detect if a wall or snake has been collided with ***/
     fun checkCollision(position: Pair<Int, Int>): Boolean {

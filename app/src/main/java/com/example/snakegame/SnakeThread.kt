@@ -1,63 +1,82 @@
 import android.graphics.*
-import android.os.Bundle
 import android.util.Log
 import android.view.SurfaceHolder
-import android.widget.Button
-import com.example.snakegame.R
+import com.example.snakegame.MainActivity
+
 import com.example.snakegame.SnakeBody
 import com.example.snakegame.SnakeMap
-import kotlinx.coroutines.delay
+import kotlin.math.abs
 
-class SnakeThread(private val surfaceHolder: SurfaceHolder, private val snakeBody: SnakeBody, private val snakeMap: SnakeMap) : Thread() {
+class SnakeThread(
+    private val surfaceHolder: SurfaceHolder,
+    private val snakeBody: SnakeBody,
+    private val snakeMap: SnakeMap,
+    private val mainActivity: MainActivity
+) : Thread() {
+
     var running = false
     var isPaused = true
     var direction = "right";
+    val steps: Int = 20
+
+    var widthBounds =  surfaceHolder.surfaceFrame.width()
+    var heightBounds = surfaceHolder.surfaceFrame.height()
+
+    var food = snakeMap.generateFood()
 
     private var paint = Paint().apply {
         color = Color.WHITE
         style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
         strokeWidth = 20.0F
     }
 
-    fun drawSnake(canvas: Canvas, x: Int, y: Int, snakeColor: Int, direction: String) {
-
-        paint = Paint().apply {
-            color = snakeColor
-            style = Paint.Style.STROKE
-            strokeWidth = 20.0F
-        }
-
-        val rotationAngle = when (direction) {
-            "up" -> 270F
-            "down" -> 90F
-            "left" -> 180F
-            "right" -> 0F
-            else -> 0F
-        }
-
-        canvas.save()
-        canvas.rotate(rotationAngle, x.toFloat(), y.toFloat())
-        canvas.drawRect((x + 5).toFloat(), (y + 5).toFloat(), (x + 15).toFloat(), (y + 15).toFloat(), paint)
-        canvas.restore()
-    }
-
-
-
     fun moveSnake(canvas: Canvas) {
 
-        snakeMap.snake.move()
+        var head = snakeMap.snake.head
 
-        for (i in (snakeBody.body.size-1) downTo 1) {
-            drawSnake(canvas, snakeMap.snake.body.get(i).column + (i*20), snakeMap.snake.body.get(i).row, Color.WHITE, direction)
+        if(direction === "down") {
+            head.row += steps
+        } else if (direction === "up") {
+            head.row -= steps
+        } else if(direction === "right") {
+            head.column += steps
+        } else if (direction === "left") {
+            head.column -= steps
         }
-        Log.e("x,y" ,snakeBody.head.column.toString())
-        drawSnake(canvas, snakeMap.snake.head.column, snakeMap.snake.head.row, Color.WHITE, direction)
+
+        snakeMap.snake.addNode(head.column, head.row)
+
+        /** Check if intersecting with bounds **/
+        if(head.column > widthBounds || head.column < 0 || head.row > heightBounds || head.row < 0) {
+
+        }
+
+        /** Check if intersecting with food **/
+        if(!(abs(head.row - food.second) < 30) || !(abs(head.column - food.first) < 30)) {
+            snakeMap.snake.removeNode()
+        } else {
+            food = snakeMap.generateFood()
+            mainActivity.runOnUiThread {
+                mainActivity.updateScore()
+            }
+        }
+
+        for (i in (snakeMap.snake.body.size-1) downTo 1) {
+            val c = snakeMap.snake.body.get(i).column.toFloat()
+            val r = snakeMap.snake.body.get(i).row.toFloat()
+            canvas.drawRect(c, r,c+steps, r+steps , paint)
+        }
+
     }
 
     fun drawFood(canvas: Canvas) {
-        canvas.drawRect(200.toFloat(), 305.toFloat(), 210.toFloat(), 310.toFloat(), paint)
-    }
 
+        val x = food.first.toFloat()
+        val y = food.second.toFloat()
+
+        canvas.drawRect(x, y, x+steps, y+steps, paint)
+    }
 
     override fun run() {
         while (running) {
@@ -65,7 +84,7 @@ class SnakeThread(private val surfaceHolder: SurfaceHolder, private val snakeBod
 
                 val canvas = surfaceHolder.lockCanvas()
 
-                sleep(20)
+                sleep(50)
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 
                 if (canvas != null) {

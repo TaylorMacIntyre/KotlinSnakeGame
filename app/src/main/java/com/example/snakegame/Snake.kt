@@ -17,52 +17,17 @@ class SnakeNode(row: Int, column: Int) {
 
 class SnakeBody {
     var body: ArrayList<SnakeNode> = ArrayList<SnakeNode>()
-    var direction: String = "right"
-    var head: SnakeNode = SnakeNode(0,0)
+    var head: SnakeNode = SnakeNode(0,80)
 
     init {
 
         this.body = ArrayList<SnakeNode>();
-        body.add(SnakeNode(0,2));
-        body.add(SnakeNode(0,1));
-        body.add(SnakeNode(0,0));
-        head = body.get(0);
-        this.direction = "right";
+        body.add( SnakeNode(0, 0))
+        body.add( SnakeNode(0, 20))
+        body.add( SnakeNode(0, 40))
+        body.add( SnakeNode(0, 60))
+        body.add(head);
 
-    }
-
-    fun move() {
-
-        for (i in (body.size-1) downTo 1) {
-            body.get(i).previousColumn = body.get(i).column
-            body.get(i).previousRow = body.get(i).row
-            body.get(i).column = body.get(i-1).column;
-            body.get(i).row = body.get(i-1).row;
-        }
-
-        if (this.direction.equals("left")) {
-            head.previousColumn = head.column
-            head.previousRow = head.row
-            head.column = head.column - 1;
-
-        }
-        else if (direction.equals("right")) {
-            head.previousColumn = head.column
-            head.previousRow = head.row
-            head.column = head.column + 1;
-        }
-
-        else if (direction.equals("down")) {
-            head.previousColumn = head.column
-            head.previousRow = head.row
-            head.row = head.row + 1;
-        }
-
-        else {
-            head.previousColumn = head.column
-            head.previousRow = head.row
-            head.row = head.row - 1;
-        }
     }
 
     fun addNode() {
@@ -75,5 +40,20 @@ class SnakeBody {
         var newNode = SnakeNode(newRow, newColumn)
 
         body.add(newNode)
+    }
+
+    fun addNode(x: Int, y: Int) {
+
+        val newColumn = x;
+        val newRow = y;
+
+        var newNode = SnakeNode(newRow, newColumn)
+
+        body.add(newNode);
+
+    }
+
+    fun removeNode() {
+        body.removeAt(0)
     }
 }
