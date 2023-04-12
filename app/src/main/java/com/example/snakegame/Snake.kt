@@ -17,7 +17,7 @@ class SnakeNode(row: Int, column: Int) {
 
 class SnakeBody {
     var body: ArrayList<SnakeNode> = ArrayList<SnakeNode>()
-    var head: SnakeNode = SnakeNode(0,80)
+    var head: SnakeNode = SnakeNode(0,120)
 
     init {
 
@@ -26,6 +26,8 @@ class SnakeBody {
         body.add( SnakeNode(0, 20))
         body.add( SnakeNode(0, 40))
         body.add( SnakeNode(0, 60))
+        body.add( SnakeNode(0, 80))
+        body.add( SnakeNode(0, 100))
         body.add(head);
 
     }

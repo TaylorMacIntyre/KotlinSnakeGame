@@ -28,7 +28,7 @@ class SnakeThread(
         color = Color.WHITE
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = 20.0F
+        strokeWidth = 15.0F
     }
 
     fun moveSnake(canvas: Canvas) {
@@ -49,7 +49,9 @@ class SnakeThread(
 
         /** Check if intersecting with bounds **/
         if(head.column > widthBounds || head.column < 0 || head.row > heightBounds || head.row < 0) {
-
+            mainActivity.runOnUiThread {
+                mainActivity.gameOver()
+            }
         }
 
         /** Check if intersecting with food **/

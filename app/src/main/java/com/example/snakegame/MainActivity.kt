@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -118,5 +120,23 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, SnakeMap.onOve
         score++
         scoreText.text = "Score: " + score.toString()
     }
-    
+
+    fun gameOver(){
+
+        snakeThread?.isPaused = true
+
+        val inflater = LayoutInflater.from(this)
+        val gameOverlay = inflater.inflate(R.layout.game_overlay, null)
+
+        val restartButton = gameOverlay.findViewById<Button>(R.id.restart_button)
+
+        val relativeLayout = findViewById<RelativeLayout>(R.id.relative_overlay)
+        relativeLayout.addView(gameOverlay)
+
+        restartButton.setOnClickListener() {
+            recreate()
+        }
+
+    }
+
 }
